@@ -1,0 +1,889 @@
+{% include 'include/head.html'%}
+{% include 'include/sidebar.html'%}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<div class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 class="m-0">Simple Additive Weighting</h1>
+				</div><!-- /.col -->
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a href="#">Metode SPK</a></li>
+					<li class="breadcrumb-item active"><a href="/metodesaw">saw</a></li>
+					</ol>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container-fluid -->
+	</div>
+	<!-- /.content-header -->
+
+	<!-- Main content -->
+	<div class="content">
+		<div class="container-fluid">
+			<div class="overlay">
+				<div class="loader"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<div class="card card-success collapsed-card">
+						<div class="card-header">
+							<strong>Tambah data dengan file</strong>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-plus"></i>
+								</button>
+							</div>
+						</div>
+						<div class="card-body">
+							<i class="fas fa-exclamation-triangle text-warning"> Coming soon!</i>
+							<!-- <form id="upload-form" enctype="multipart/form-data">
+									<div class="form-group">
+										<label for="file-input">Pilih file:</label>
+										<input type="file" class="form-control-file" id="file-input" name="file">
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-app bg-secondary"><i class="fas fa-upload"><span> upload</span></i></button>
+									</div>
+							</form>
+							<div class="progress mt-3" style="display: none;">
+									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0;"></div>
+							</div> -->
+						</div>
+						<!-- <div class="card-footer">
+							<blockquote class="quote-info">
+								<p>Ketentuan file :</p>
+								<ul>
+									<li>ukuran file <span class="badge badge-danger">max 10mb</span></li>
+									<li>Mengandung kolom <b>namaPemain</b><span class="badge badge-danger">(Nama)</span></li>
+									<li>Mengandung kolom <b>averageGpm</b><span class="badge badge-danger">(AVg)</span></li>
+									<li>Mengandung kolom <b>averageKda</b><span class="badge badge-danger">(Avg)</span></li>
+									<li>Mengandung kolom <b>averageDamage</b><span class="badge badge-danger">(Avg)</span></li>
+									<li>Mengandung kolom <b>averageDamageDiterima</b><span class="badge badge-danger">(Avg)</span></li>
+									<li>Mengandung kolom <b>komunikasi</b><span class="badge badge-danger">(Skor)</span></li>
+									<li>Mengandung kolom <b>teamFight</b><span class="badge badge-danger">(Jumlah)</span></li>
+									<li>Mengandung kolom <b>turnYgDijuarai</b><span class="badge badge-danger">(Total)</span></li>
+									<li>Mengandung kolom <b>namaHero</b><span class="badge badge-danger">(nama)</span></li>
+									<li>Mengandung kolom <b>heroPower</b><span class="badge badge-danger">(Jumlah)</span></li>
+									<li>Mengandung kolom <b>pertandingan</b><span class="badge badge-danger">(Total)</span></li>
+									<li>Mengandung kolom <b>winRate</b><span class="badge badge-danger">(Persen)</span></li>
+								</ul>
+							</blockquote>
+						</div> -->
+					<!-- card -->
+					</div>
+				<!-- col-md-3 -->
+				</div>
+			<!-- row -->
+			<!-- </div> -->
+				<!-- col-2 -->
+				<div class="col-md-9">
+					<div class="card card-info text-center collapsed-card">
+						<div class="card-header">
+							<strong>Tambah Data</strong>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-plus"></i>
+								</button>
+							</div>
+						</div>
+						<!-- card-header -->
+						<div class="card-body">
+							<form action="" id="form-tambah-data">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="nama-pemain">Nama Pemain<span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="text" class="form-control" id="nama-pemain" name="namaPemain">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="average-gpm">Average GPM <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="average-gpm" name="averageGpm">
+										<span class="text-muted">Ex : 600</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="average-kda">Average KDA <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="average-kda" step="0.01" name="averageKda">
+										<span class="text-muted">Ex : 3.25</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="average-damage">Average Damage <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="average-damage" name="averageDamage">
+										<span class="text-muted">Ex : 3210</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="average-damage-diterima">Average Damage Diterima <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="average-damage-diterima" step="0.01" name="averageDamageDiterima">
+										<span class="text-muted">Ex : 15600</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="komunikasi">Komunikasi <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="komunikasi" step="0.01" name="komunikasi">
+										<span class="text-muted">Ex : 80</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="team-fight">Team Fight <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="team-fight" step="0.01" name="teamFight">
+										<span class="text-muted">Ex : 50.9</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="turn-yg-dijuarai">Turn Yang Dijuarai <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="turn-yg-dijuarai" step="0.01" name="turnYgDijuarai">
+										<span class="text-muted">Ex : 1</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="nama-hero">Nama Hero <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="text" class="form-control" id="nama-hero" step="0.01" name="namaHero">
+										<span class="text-muted">Ex : Lancelot</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="hero-power">Hero Power <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="hero-power" step="0.01" name="heroPower">
+										<span class="text-muted">Ex : 3345</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="pertandingan">Pertandingan <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="pertandingan" step="0.01" name="pertandingan">
+										<span class="text-muted">Ex : 120</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="win-rate">Win Rate <span class="badge badge-warning">Wajib diisi</span></label>
+										<input required type="number" class="form-control" id="win-rate" step="0.01" name="winRate">
+										<span class="text-muted">Ex : 65.3</span>
+									</div>
+									<div class="col-12">
+										<button type="submit" class="btn btn-app bg-success"><i class="fas fa-plus"></i>add data</button>
+									</div>
+								</div>
+							</form>
+							<!-- #form-tambah-data -->
+						</div>
+					</div>
+					<!-- card -->
+				</div>
+				<!-- .col-9 -->
+				<div class="col-12">
+					<div class="card card-info card-outline">
+						<div class="card-header text-center">
+							<strong>Data Pemain</strong>
+							<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse">
+								<i class="fas fa-minus"></i>
+							</button>
+							</div>
+						</div>
+						<!-- card-header -->
+						<div class="card-body">
+							<div class="card">
+								<div class="card-body">
+									<div class="m-0 p-0 table-responsive">
+										<table id="table-pemain" class="table table-bordered table-hover text-center" style="width:100%">
+											<thead>
+												<tr>
+													<th style="display: none;">_id</th>
+													<th>Nama Pemain</th>
+													<th>Average GPM </th>
+													<th>Average KDA </th>
+													<th>Average Damage </th>
+													<th>Average Damage Diterima</th>
+													<th>Komunikasi</th>
+													<th>Team Fight(%)</th>
+													<th>Turn Yang Dijuarai</th>
+													<th>Nama Hero</th>
+													<th>Hero Power</th>
+													<th>Pertandingan </th>
+													<th>Win Rate(%)</th>
+													<th>Aksi</th>
+												</tr>
+											</thead>
+											<tbody id="body-table-pemain">
+		
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- card body -->
+					</div>
+					<!-- card -->
+				</div>
+				<!-- col-12 -->
+				<div class="col-12">
+					<div class="card card-success">
+						<div class="card-header text-center">
+							<strong>Pemilihan Terbaik dengan metode SAW</strong>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						<!-- card header -->
+						<div class="card-body">
+							<div class="container-fluid">
+								<div class="card">
+									<div class="card-header">
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse">
+												<i class="fas fa-minus"></i>
+											</button>
+										</div>
+									</div>
+									<!-- card header -->
+									<div class="card-body">
+										<div class="callout callout-info">
+											<h5 class="text-center"><strong>Bobot Kriteria</strong></h5>
+											<div class="row">
+												<div class="form-group col-md-2">
+													<label for="kriteria-1">Average GPM</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.25" id="kriteria-1" name="kriteria-1" min="0" max="1" step="0.01">
+													<span class="text-muted">Default : 0.25</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-2">Average KDA</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.15" id="kriteria-2" name="kriteria-2" min="0" max="1" step="0.01">
+													<span class="text-muted">Default : 0.15</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-3">Avg Damage</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.1" id="kriteria-3" name="kriteria-3" min="0" max="1" step="0.1">
+													<span class="text-muted">Default : 0.1</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-4">Avg Damage Diterima</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.02" id="kriteria-4" name="kriteria-4" min="0" max="1" step="0.01">
+													<span class="text-muted">Default : 0.02</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-5">Komunikasi</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.04" id="kriteria-5" name="kriteria-5" min="0" max="1" step="0.01">
+													<span class="text-muted">Default : 0.04</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-6">Team Fight</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.1" id="kriteria-6" name="kriteria-6" min="0" max="1" step="0.1">
+													<span class="text-muted">Default : 0.1</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-7">Turn Yg Dijuarai</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.04" id="kriteria-7" name="kriteria-7" min="0" max="1" step="0.01">
+													<span class="text-muted">Default : 0.04</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-8">Hero Power</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.1" id="kriteria-8" name="kriteria-8" min="0" max="1" step="0.1">
+													<span class="text-muted">Default : 0.1</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-9">Pertandingan</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.1" id="kriteria-9" name="kriteria-9" min="0" max="1" step="0.1">
+													<span class="text-muted">Default : 0.1</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label for="kriteria-10">Win Rate</label>
+													<input required type="number" class="form-control kriteria control-kriteria" value="0.1" id="kriteria-10" name="kriteria-10" min="0" max="1" step="0.1">
+													<span class="text-muted">Default : 0.1</span>
+												</div>
+											</div>
+											
+										</div>
+										<!-- callout-info -->
+										<div class="callout callout-info">
+											<h5 class="text-center"><strong>Type Kriteria</strong></h5>
+											<div class="row">
+												<div class="form-group col-md-2">
+													<label>Type Average GPM</label>
+													<select class="form-control control-kriteria" name="type-average-gpm" id="type-average-gpm">
+														<option value="benefit" selected>benefit</option>
+														<option value="cost">cost</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Average KDA</label>
+													<select class="form-control control-kriteria" name="type-average-kda" id="type-average-kda">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Average Damage</label>
+													<select class="form-control control-kriteria" name="type-average-damage" id="type-average-damage">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Damage Yg Diterima</label>
+													<select class="form-control control-kriteria" name="type-damage-yg-diterima" id="type-damage-yg-diterima">
+														<option value="benefit">benefit</option>
+														<option value="cost" selected>cost</option>
+													</select>
+													<span class="text-muted">Default : cost</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Komunikasi</label>
+													<select class="form-control control-kriteria" name="type-komunikasi" id="type-komunikasi">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Team Fight</label>
+													<select class="form-control control-kriteria" name="type-team-fight" id="type-team-fight">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Turnamen Yang Dijuarai</label>
+													<select class="form-control control-kriteria" name="type-turnamen-yg-dijuarai" id="type-turnamen-yg-dijuarai">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Hero Power</label>
+													<select class="form-control control-kriteria" name="type-hero-power" id="type-hero-power">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Pertandingan</label>
+													<select class="form-control control-kriteria" name="type-pertandingan" id="type-pertandingan">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+												<div class="form-group col-md-2">
+													<label>Type Win Rate</label>
+													<select class="form-control control-kriteria" name="type-win-rate" id="type-win-rate">
+														<option value="cost">cost</option>
+														<option value="benefit" selected>benefit</option>
+													</select>
+													<span class="text-muted">Default : benefit</span>
+												</div>
+											</div>
+											<!-- row -->
+										</div>
+										<!-- callout-info -->
+									</div>
+									<!-- card-body -->
+								</div>
+								<!-- card -->
+							</div>
+							<!-- container-fluid -->
+						</div>
+							<div class="card">
+								<div class="card-body">
+									<div class="m-0 p-0 table-responsive">
+										<table id="table-rekomendasi-pemain" class="table table-bordered table-hover text-center" style="width:100%">
+											<thead>
+												<tr>
+													<th>Ranking</th>
+													<th>Nilai perhitungan</th>
+													<th>Nama Pemain</th>
+													<th>Average Damage</th>
+													<th>Average KDA</th>
+													<th>Average Damage Diterima</th>
+													<th>Komunikasi</th>
+													<th>Team Fight(%)</th>
+													<th>Turn Yg Dijuarai</th>
+													<th>Nama Hero</th>
+													<th>Hero Power</th>
+													<th>Pertandingan</th>
+													<th>Win Rate(%)</th>
+												</tr>
+											</thead>
+											<tbody id="body-table-rekomendasi-pemain">
+		
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<!-- card -->
+					</div>
+				</div>
+				<!-- col-12 -->
+			<!-- </div> -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+		<div class="container-fluid">
+			<!-- Modal -->
+			<div class="modal fade" id="modal-edit-data">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Edit Data</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form action="" id="form-edit-data">
+						<div class="modal-body">
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="edit-nama-pemain">Nama Pemain</label>
+										<input type="text" class="form-control" id="edit-nama-pemain" name="edit-nama-pemain">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-avg-gpm">Avg GPM</label>
+										<input type="number" class="form-control" id="edit-avg-gpm" name="edit-avg-gpm">
+										<span class="text-muted">Ex : 600</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-avg-kda">Avg KDA</span></label>
+										<input type="number" class="form-control" id="edit-avg-kda" step="0.01" name="edit-avg-kda">
+										<span class="text-muted">Ex : 3.25</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-avg-damage">Avg Damage</label>
+										<input type="number" class="form-control" id="edit-avg-damage" name="edit-avg-damage">
+										<span class="text-muted">Ex : 3210</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-avg-damage-diterima">Avg Damage Diterima</label>
+										<input type="number" class="form-control" id="edit-avg-damage-diterima" step="0.01" name="edit-avg-damage-diterima">
+										<span class="text-muted">Ex : 15600</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-komunikasi">Komunikasi</label>
+										<input type="number" class="form-control" id="edit-komunikasi" step="0.01" name="edit-komunikasi">
+										<span class="text-muted">Ex : 80</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-team-fight">Team Fight</label>
+										<input type="number" class="form-control" id="edit-team-fight" step="0.01" name="edit-team-fight">
+										<span class="text-muted">Ex : 50.9</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-turn-yg-dijuarai">Turn Yg Dijuarai</label>
+										<input type="number" class="form-control" id="edit-turn-yg-dijuarai" step="0.01" name="edit-turn-yg-dijuarai">
+										<span class="text-muted">Ex : 1</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-nama-hero">Nama Hero</label>
+										<input type="text" class="form-control" id="edit-nama-hero" step="0.01" name="edit-nama-hero">
+										<span class="text-muted">Ex : Lancelot</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-hero-power">Hero Power</label>
+										<input type="number" class="form-control" id="edit-hero-power" step="0.01" name="edit-hero-power">
+										<span class="text-muted">Ex : 3345</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-pertandingan">Pertandingan</label>
+										<input type="number" class="form-control" id="edit-pertandingan" step="0.01" name="edit-pertandingan">
+										<span class="text-muted">Ex : 120</span>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="edit-win-rate">Win Rate</label>
+										<input type="number" class="form-control" id="edit-win-rate" step="0.01" name="edit-win-rate">
+										<span class="text-muted">Ex : 65.3</span>
+									</div>
+									<input type="hidden" name="id-edit-pemain" id="id-edit-pemain" value="">
+						</div>
+						<!-- modal-body -->
+						<div class="modal-footer justify-content-between">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="submit" class="btn btn-primary">Edit Data</button>
+						</div>
+						</form>
+						<!-- form-edit-data -->
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!--end modal -->
+		</div>
+		<!-- /.container-fluid -->
+	</div>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+	
+	{% include 'include/footer.html'%}
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+{% include 'include/script.html'%}
+<script>
+	$(document).ready(function(){
+		// $('#modal-edit-data').modal('show');
+
+		var Toast = Swal.mixin({
+			toast: true,
+			position: 'center',
+			showConfirmButton: false,
+			timer: 2500
+		});
+
+		$('#metode-spk').addClass('menu-open');
+		$('#metode-spk').children().addClass('active');
+		$('#metode-spk-saw').addClass('active');
+
+		$('.overlay').fadeOut('slow');
+
+		indexData();
+		indexRank();
+
+		// Meng-handle pengiriman form pengunggahan file
+		$('#upload-form').on('submit', function(e) {
+			e.preventDefault();
+
+			// Menampilkan progress bar
+			$('.progress').show();
+
+			// Menggunakan FormData untuk mengirim file
+			var formData = new FormData(this);
+
+			$.ajax({
+				url: '/upload', // Ganti URL sesuai dengan URL endpoint server Anda
+				type: 'POST',
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				xhr: function() {
+					// Menggunakan XMLHttpRequest untuk memantau progres pengunggahan
+					var xhr = new XMLHttpRequest();
+					xhr.upload.addEventListener('progress', function(e) {
+						if (e.lengthComputable) {
+								var progress = (e.loaded / e.total) * 100;
+								$('.progress-bar').css('width', progress + '%').attr('aria-valuenow', progress).text(progress.toFixed(2) + '%');
+						}
+					});
+					return xhr;
+				},
+				success: function(response) {
+					// Menyembunyikan progress bar setelah pengunggahan selesai
+					$('.progress').hide();
+					Swal.fire({
+						position: 'center',
+						icon: 'success',
+						title: response,
+						showConfirmButton: false,
+						timer: 4000
+					});
+				},
+				error: function(xhr, status, error) {
+					// Menyembunyikan progress bar dan menampilkan pesan error jika terjadi kesalahan
+					$('.progress').hide();
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: xhr.status+'</br>'+xhr.responseText,
+						showConfirmButton: false,
+						timer: 4000
+					});
+				}
+			});
+		});
+
+		$('#form-tambah-data').submit(function(e){
+			e.preventDefault();
+			$.ajax({
+				type: 'POST',
+				url: '/tambah-data',
+				data: $(this).serialize(),
+				success: function(response){
+					if(response.status){
+						Swal.fire({
+							position: 'center',
+							icon: 'success',
+							title: response.msg,
+							showConfirmButton: false,
+							timer: 2500
+						});
+					}else{
+						Swal.fire({
+							position: 'center',
+							icon: 'error',
+							title: response.msg,
+							showConfirmButton: true,
+							timer: 2500
+						});
+					}
+					indexData();
+					indexRank();
+					$('#form-tambah-data').trigger('reset');
+				},
+				error: function(error){
+					alert('Terjadi kesalahan saat menambahkan data!');
+				}
+			});
+    });
+		
+		$('#form-edit-data').submit(function(e){
+			e.preventDefault();
+			Swal.fire({
+				icon: 'warning',
+				title: 'Apakah anda yakin',
+				text: "akan mengedit data ini?",
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Ya, Edit',
+				
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						type: 'POST',
+						url: '/edit-data',
+						data: $(this).serialize(),
+						success: function(response){
+							if(response.status){
+								Swal.fire({
+									position: 'center',
+									icon: 'success',
+									title: response.msg,
+									showConfirmButton: false,
+									timer: 2500
+								});
+							}else{
+								Swal.fire({
+									position: 'center',
+									icon: 'error',
+									title: response.msg,
+									showConfirmButton: true,
+									timer: 2500
+								});
+							}
+							indexData();
+							indexRank();
+							$('#modal-edit-data').modal('hide');
+							$('#form-edit-data').trigger('reset');
+						},
+						error: function(error){
+							alert('Terjadi kesalahan saat mengedit data!');
+						}
+					});
+				}
+			});
+    });
+
+		$('.control-kriteria').change(()=>{
+			indexRank();
+		});
+
+		function indexData() {
+			tablePemain = $('#table-pemain');
+			if ($.fn.DataTable.isDataTable(tablePemain)) {
+				tablePemain.DataTable().destroy();
+			}
+			$.post( "/indexData", function( data ) {
+				if (data.status){
+					$('#body-table-pemain').html(data.res);
+
+					//proses edit data
+					$('.btn-edit').on('click', function(){
+						id = $(this).attr('id');
+						
+						$.ajax({
+							type: 'POST',
+							url: '/get-one-data/' + id,
+							dataType: 'json',
+							beforeSend: ()=>{$('.overlay').fadeIn('slow')},
+							success: (response) => {
+								$('.overlay').fadeOut('slow');
+								if(response.status) {
+									data = response.data;
+									$('#id-edit-pemain').val(String(data._id));
+									$('#edit-nama-pemain').val(data.nama_pemain);
+									$('#edit-avg-gpm').val(parseInt(data.avg_gpm));
+									$('#edit-avg-kda').val(parseFloat(data.avg_kda));
+									$('#edit-avg-damage').val(parseInt(data.avg_damage));
+									$('#edit-avg-damage-diterima').val(parseInt(data.avg_dmg_diterima));
+									$('#edit-komunikasi').val(parseFloat(data.komunikasi));
+									$('#edit-team-fight').val(parseInt(data.team_fight));
+									$('#edit-turn-yg-dijuarai').val(parseInt(data.tourn_yg_dijuarai));
+									$('#edit-nama-hero').val(data.nama_hero);
+									$('#edit-hero-power').val(parseInt(data.hero_power));
+									$('#edit-pertandingan').val(parseInt(data.pertandingan));
+									$('#edit-win-rate').val(parseInt(data.win_rate));
+									$('#modal-edit-data').modal('show');
+								}else{
+									Toast.fire({
+										position: 'center',
+										icon: 'error',
+										title: response.msg,
+										showConfirmButton: true,
+										timer: 2500
+									});
+								};
+							},
+							error: function(xhr) {
+								alert(xhr.responseText);
+							}
+						});
+					});
+
+					//hapus data
+					$('.btn-hapus').on('click', function(){
+						Swal.fire({
+							icon: 'warning',
+							title: 'Apakah anda yakin',
+							text: "akan menghapus data ini?",
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Ya, hapus',
+							
+						}).then((result) => {
+							if (result.isConfirmed) {
+								id = $(this).attr('id');
+								$.ajax({
+									type: 'DELETE',
+									url: '/delete-one/' + id,
+									dataType: 'json',
+									success: function(response) {
+										if(response.status) {
+											Swal.fire({
+												position: 'center',
+												icon: 'success',
+												title: response.msg,
+												showConfirmButton: false,
+												timer: 2500
+											});
+										}else{
+											Toast.fire({
+												position: 'center',
+												icon: 'error',
+												title: response.msg,
+												showConfirmButton: true,
+												timer: 2500
+											});
+										}
+										indexData();
+										indexRank();
+									},
+									error: function(xhr) {
+										alert(xhr.responseText);
+									}
+								});
+							}
+						});
+						
+					});
+					tablePemain.DataTable({
+						autoWidth: true,
+						ordering: true,
+						order: [[0, 'desc']],
+						// "columns": [
+						// 	{ "width": "0%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "15%" },
+						// 	{ "width": "10%" },
+						// ]
+					});
+				}else{
+					text = `
+					<tr>
+						<td colspan="7">Data Tidak tersedia</td>
+					</tr>
+					`;
+					$('#body-table-pemain').html( text );
+				}
+			}, "json");
+		};
+		
+		function indexRank(){
+			tableRekomendasiPemain = $('#table-rekomendasi-pemain');
+			if ($.fn.DataTable.isDataTable(tableRekomendasiPemain)) {
+				tableRekomendasiPemain.DataTable().destroy();
+			};
+			param = [
+				{rating:parseFloat($("#kriteria-1").val()), atribut:$("#type-average-gpm").val()},
+				{rating:parseFloat($("#kriteria-2").val()), atribut:$("#type-average-kda").val()},
+				{rating:parseFloat($("#kriteria-3").val()), atribut:$("#type-average-damage").val()},
+				{rating:parseFloat($("#kriteria-4").val()), atribut:$("#type-damage-yg-diterima").val()},
+				{rating:parseFloat($("#kriteria-5").val()), atribut:$("#type-komunikasi").val()},
+				{rating:parseFloat($("#kriteria-6").val()), atribut:$("#type-team-fight").val()},
+				{rating:parseFloat($("#kriteria-7").val()), atribut:$("#type-turnamen-yg-dijuarai").val()},
+				{rating:parseFloat($("#kriteria-8").val()), atribut:$("#type-hero-power").val()},
+				{rating:parseFloat($("#kriteria-9").val()), atribut:$("#type-pertandingan").val()},
+				{rating:parseFloat($("#kriteria-10").val()), atribut:$("#type-win-rate").val()},
+			];
+			$.ajax({
+				type: "POST",
+				url: '/indexRanking',
+				contentType:"application/json",
+				data: JSON.stringify(param),
+				dataType: 'json',
+				success: function(data) {
+					// console.log(data);
+					if (data.status){
+						no = 0;
+						text = '';
+	
+						for (let i = 0; i < data.res.length; i++) {
+							text += `
+							<tr>
+								<td>${no+=1}</td>
+								<td>${data.res[i][0]}</td>
+								<td>${data.res[i][1]['nama_pemain']}</td>
+								<td>${data.res[i][1]['avg_damage']}</td>
+								<td>${data.res[i][1]['avg_kda']}</td>
+								<td>${data.res[i][1]['avg_dmg_diterima']}</td>
+								<td>${data.res[i][1]['komunikasi']}</td>
+								<td>${data.res[i][1]['team_fight']}</td>
+								<td>${data.res[i][1]['tourn_yg_dijuarai']}</td>
+								<td>${data.res[i][1]['nama_hero']}</td>
+								<td>${data.res[i][1]['hero_power']}</td>
+								<td>${data.res[i][1]['pertandingan']}</td>
+								<td>${data.res[i][1]['win_rate']}</td>
+							</tr>
+							`;
+						}
+						
+						$('#body-table-rekomendasi-pemain').html( text );
+						tableRekomendasiPemain.DataTable({
+							// columns :[
+							// 	{ "width": "5%" },
+							// 	{ "width": "15%" },
+							// 	{ "width": "15%" },
+							// 	{ "width": "15%" },
+							// 	{ "width": "10%" },
+							// 	{ "width": "15%" },
+							// 	{ "width": "15%" },
+							// 	{ "width": "10%" },
+							// ],
+							dom: 'Bfrtip',
+							buttons: [
+							'copy', 'csv', 'excel', 'pdf', 'print'
+							],
+						});
+					}else{
+						text = `
+						<tr>
+							<td colspan="8">Data Tidak tersedia</td>
+						</tr>
+						`;
+						$('#body-table-rekomendasi-pemain').html( text );
+					}
+				},
+			});
+		};
+	
+	});
+</script>
