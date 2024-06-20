@@ -706,17 +706,17 @@
 									data = response.data;
 									$('#id-edit-pemain').val(String(data._id));
 									$('#edit-nama-pemain').val(data.nama_pemain);
-									$('#edit-avg-gpm').val(parseInt(data.avg_gpm));
+									$('#edit-avg-gpm').val(parseFloat(data.avg_gpm));
 									$('#edit-avg-kda').val(parseFloat(data.avg_kda));
-									$('#edit-avg-damage').val(parseInt(data.avg_damage));
-									$('#edit-avg-damage-diterima').val(parseInt(data.avg_dmg_diterima));
+									$('#edit-avg-damage').val(parseFloat(data.avg_damage));
+									$('#edit-avg-damage-diterima').val(parseFloat(data.avg_dmg_diterima));
 									$('#edit-komunikasi').val(parseFloat(data.komunikasi));
-									$('#edit-team-fight').val(parseInt(data.team_fight));
-									$('#edit-turn-yg-dijuarai').val(parseInt(data.tourn_yg_dijuarai));
+									$('#edit-team-fight').val(parseFloat(data.team_fight));
+									$('#edit-turn-yg-dijuarai').val(parseFloat(data.tourn_yg_dijuarai));
 									$('#edit-nama-hero').val(data.nama_hero);
-									$('#edit-hero-power').val(parseInt(data.hero_power));
-									$('#edit-pertandingan').val(parseInt(data.pertandingan));
-									$('#edit-win-rate').val(parseInt(data.win_rate));
+									$('#edit-hero-power').val(parseFloat(data.hero_power));
+									$('#edit-pertandingan').val(parseFloat(data.pertandingan));
+									$('#edit-win-rate').val(parseFloat(data.win_rate));
 									$('#modal-edit-data').modal('show');
 								}else{
 									Toast.fire({
