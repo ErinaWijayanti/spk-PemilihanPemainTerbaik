@@ -2,3 +2,4 @@ erina/
 .env
 .vercel
 __pycache__
+venv

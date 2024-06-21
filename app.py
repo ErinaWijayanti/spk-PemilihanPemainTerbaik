@@ -428,90 +428,126 @@ def getAllDataTraining():
 
 @app.route("/indexRanking", methods=['POST'])
 def index_ranking():
-	if 'username' and 'password' in session:
-		paramKriteria = request.get_json()
-		test = {}
-		j = 1
-		for i in paramKriteria:
-			test['C' + str(j)] = {'rating': i['rating'], 'atribut': i['atribut']}
-			j += 1
-		
-		status = False
-		res = []
+    if 'username' and 'password' in session:
+        paramKriteria = request.get_json()
+        test = {}
+        j = 1
+        for i in paramKriteria:
+            test['C' + str(j)] = {'rating': i['rating'], 'atribut': i['atribut']}
+            j += 1
 
-		allData = getAllDataTraining()
-		data = allData["data"]
-		if len(data) != 0:
-			status = True
+        status = False
+        res = []
 
-			kriteria = test
+        allData = getAllDataTraining()
+        data = allData["data"]
+        if len(data) != 0:
+            status = True
+            # print(data)
+            kriteria = test
+			# Definisi rentang normalisasi untuk setiap kriteria
+            rentang_c1 = [(1, 500, 1), (501, 650, 2), (651, 750, 3), (751, 800, 4), (801, 1000, 5)]
+            rentang_c2 = [(1, 2.99, 1), (3, 4.99, 2), (5, 6.99, 3), (7, 8.99, 4), (9, 10, 5)]
+            rentang_c3 = [(1000, 2999, 1), (3000, 4999, 2), (5000, 6999, 3), (7000, 8999, 4), (9000, 10000, 5)]
+            rentang_c4 = [(20000, 30000, 1), (16000, 19999, 2), (10000, 15999, 3), (6000, 9999, 4), (1000, 5999, 5)]
+            rentang_c5 = [(1, 50, 1), (51, 60, 2), (61, 70, 3), (71, 90, 4), (91, 100, 5)]
+            rentang_c6 = [(1, 50.9, 1), (51, 60.9, 2), (61, 75.9, 3), (76, 79.9, 4), (80, 100, 5)]
+            rentang_c7 = [(0, 0, 1), (0, 1, 2), (0, 2, 3), (0, 3, 4), (0, 5, 5)]
+            rentang_c8 = [(100, 1000, 1), (1001, 2000, 2), (2001, 3000, 3), (3001, 4000, 4), (4001, 5000, 5)]
+            rentang_c9 = [(1, 499, 1), (500, 999, 2), (1000, 1999, 3), (2000, 2999, 4), (3000, 5000, 5)]
+            rentang_c10 = [(1, 50.9, 1), (51, 59.9, 2), (60, 69.9, 3), (70, 79.9, 4), (80, 100, 5)]
+			# # Definisikan rentang untuk kriteria lainnya (C4 sampai C10)
 
-			# mendapatkan rating kriteria 
-			rating =[kriteria[i]['rating'] for i in kriteria.keys()]
 
-			# normalisasi bobot 
-			bobot = [val/sum(rating) for val in rating]
+			# # Fungsi untuk melakukan normalisasi
+            def normalisasi(nilai, rentang):
+                for batas_bawah, batas_atas, nilai_normalisasi in rentang:
+                    if batas_bawah <= nilai <= batas_atas:
+                       return nilai_normalisasi
+                return None
 
-			C_MaxMin = []
+			# # Melakukan normalisasi untuk setiap data pada setiap kriteria
+            data_normalisasi = {}
+            for nama, nilai_kriteria in data.items():
+                data_normalisasi[nama] = {}
+                data_normalisasi[nama]['C1'] = normalisasi(nilai_kriteria['C1'], rentang_c1)
+                data_normalisasi[nama]['C2'] = normalisasi(nilai_kriteria['C2'], rentang_c2)
+                data_normalisasi[nama]['C3'] = normalisasi(nilai_kriteria['C3'], rentang_c3)
+                data_normalisasi[nama]['C4'] = normalisasi(nilai_kriteria['C4'], rentang_c4)
+                data_normalisasi[nama]['C5'] = normalisasi(nilai_kriteria['C5'], rentang_c5)
+                data_normalisasi[nama]['C6'] = normalisasi(nilai_kriteria['C6'], rentang_c6)
+                data_normalisasi[nama]['C7'] = normalisasi(nilai_kriteria['C7'], rentang_c7)
+                data_normalisasi[nama]['C8'] = normalisasi(nilai_kriteria['C8'], rentang_c8)
+                data_normalisasi[nama]['C9'] = normalisasi(nilai_kriteria['C9'], rentang_c9)
+                data_normalisasi[nama]['C10'] = normalisasi(nilai_kriteria['C10'], rentang_c10)
+				# Definisikan normalisasi untuk kriteria lainnya (C4 sampai C10)
 
-			#perulangan utk dpt atribut kriteria
-			for key in kriteria.keys():
-				C = [
-					data[i][key] for i in data.keys()
-				]
+            print(data_normalisasi)
+            # mendapatkan rating kriteria 
+            rating =[kriteria[i]['rating'] for i in kriteria.keys()]
 
-				#periksa atribut apkah cost / benefit
-				if kriteria[key]['atribut'] == 'benefit':
-					C_MaxMin.append(max(C))
-				else:
-					C_MaxMin.append(min(C))
-			
-			#normalisasi
-			norms = []
-			v = []
-			n=0
-			for vals in data.values():
-				norm = []
-				i = 0
-				vn = 0
-				#langkah mendapat atribut kriteria
-				for key, val in vals.items():
-					#cek atribut apakah cost / benefit
-					if kriteria[key]['atribut'] == 'benefit':
-						n = val/C_MaxMin[i] #menyimpan normalisasi dlam var n
-					else:
-						C_MaxMin.append(min(C))
-					
-					#menghitung vn
-					vn += (n * bobot[i])
-					norm.append(n)
-					i+=1
-				#simpan hasil normalisasi
-				norms.append(norm)
-				#simpan vn ke dalam vektor v
-				v.append(round(vn,3))
-			
-			#langkah perangkingan
-			rank = {}
-			i = 0
-			for key in data.keys():
-				rank[key] = v[i]
-				i+=1
+            # normalisasi bobot 
+            bobot = [val/sum(rating) for val in rating]
 
-			sorted_rank = sorted(
-				[
-					(value, key) for (key, value) in rank.items()
-				], reverse=True
-			)
+            C_MaxMin = []
 
-			for i in sorted_rank:
-				cek = getData(i[1])
-				res.append([i[0],cek])
+            # perulangan utk dpt atribut kriteria
+            for key in kriteria.keys():
+                C = [
+                    data_normalisasi[i][key] for i in data_normalisasi.keys()
+                ]
 
-		return jsonify({'status': status,'res': res,})
-	return redirect('/login')
+                # periksa atribut apakah cost / benefit
+                if kriteria[key]['atribut'] == 'benefit':
+                    C_MaxMin.append(max(C))
+                else:
+                    C_MaxMin.append(min(C))
 
+            # normalisasi
+            norms = []
+            v = []
+            for vals in data_normalisasi.values():
+                norm = []
+                vn = 0
+                i = 0
+                # langkah mendapat atribut kriteria
+                for key, val in vals.items():
+                    # cek atribut apakah cost / benefit
+                    if kriteria[key]['atribut'] == 'benefit':
+                        n = val / C_MaxMin[i]  # menyimpan normalisasi dalam var n
+                    else:
+                        n = C_MaxMin[i] / val  # menyimpan normalisasi dalam var n
+
+                    # menghitung vn
+                    vn += (n * bobot[i])
+                    norm.append(n)
+                    i += 1
+                # simpan hasil normalisasi
+                norms.append(norm)
+                # simpan vn ke dalam vektor v
+                v.append(round(vn, 3))
+
+            # langkah perangkingan
+            # print(norm)
+            rank = {}
+            i = 0
+            for key in data.keys():
+                rank[key] = v[i]
+                i += 1
+
+            sorted_rank = sorted(
+                [
+                    (value, key) for (key, value) in rank.items()
+                ], reverse=True
+            )
+
+            for i in sorted_rank:
+                cek = getData(i[1])
+                res.append([i[0], cek])
+
+        return jsonify({'status': status, 'res': res,})
+    return redirect('/login')
 
 # testing local
-# if __name__ == "__main__":
-# 	app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
