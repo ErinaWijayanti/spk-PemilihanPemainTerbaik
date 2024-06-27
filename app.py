@@ -482,7 +482,7 @@ def index_ranking():
                 data_normalisasi[nama]['C10'] = normalisasi(nilai_kriteria['C10'], rentang_c10)
 				# Definisikan normalisasi untuk kriteria lainnya (C4 sampai C10)
 
-            print(data_normalisasi)
+            # print(data_normalisasi)
             # mendapatkan rating kriteria 
             rating =[kriteria[i]['rating'] for i in kriteria.keys()]
 
@@ -549,5 +549,5 @@ def index_ranking():
     return redirect('/login')
 
 # testing local
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
